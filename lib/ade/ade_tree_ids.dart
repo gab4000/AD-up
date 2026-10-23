@@ -28,8 +28,8 @@ void load(BuildContext context, ADESessionParams params, String classID) async {
           name: element["summary"].toString(),
           location: element["location"].toString().replaceAll("(V)", ""),
           teacher: RegExp(r'^[^\d\n]+$', multiLine: true).firstMatch(description)?.group(0) ?? "N/A",
-          start: DateTime.parse((element["dtstart"] as IcsDateTime).dt).add(Duration(hours: 2)),
-          end: DateTime.parse((element["dtend"] as IcsDateTime).dt).add(Duration(hours: 2)),
+          start: DateTime.parse((element["dtstart"] as IcsDateTime).dt).add(Duration(hours: 1)),
+          end: DateTime.parse((element["dtend"] as IcsDateTime).dt).add(Duration(hours: 1)),
           type: RegExp(r'_(CM|TD|TP)_').firstMatch(description)?.group(1) ?? "TD");
       classes.add(c);
       // print(description);
