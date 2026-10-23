@@ -1,5 +1,5 @@
-import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:dio/dio.dart';
@@ -72,7 +72,7 @@ void requestInstallUnknownSourcesPermission() async {
   }
 }
 
-void checkVersion(BuildContext context) async {
+void checkVersion(BuildContext context, bool asked) async {
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
   currentVersion.value = packageInfo.version;
 
@@ -80,13 +80,18 @@ void checkVersion(BuildContext context) async {
   final mapData = loadYaml(response.data);
   latestVersion.value = mapData['version'];
 
-  if (currentVersion.value != latestVersion.value) {
-    final String releaseLink = "https://github.com/gab4000/AD-up/releases/download/${latestVersion.value}";
+  if (!isCurrentTheLatestVersion(currentVersion.value, latestVersion.value)) {
     Response releaseResponse = await Dio().get("https://api.github.com/repos/gab4000/AD-up/releases/tags/${latestVersion.value}");
-    final releaseData = jsonDecode(releaseResponse.data);
-    releaseNode.value = releaseData['body'];
-    downloadUrl.value = "$releaseLink/AD-up_${latestVersion.value}.apk";
+    releaseNode.value = (releaseResponse.data['body'] as String).replaceAll("# ", "");
+    downloadUrl.value = "https://github.com/gab4000/AD-up/releases/download/${latestVersion.value}/AD-up_${latestVersion.value}.apk";
     showUpdateDialog(context);
+  } else if (asked) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Pas de mise à jour disponible"),
+        backgroundColor: Theme.of(context).colorScheme.primary
+      )
+    );
   }
 }
 
@@ -107,17 +112,16 @@ void showUpdateDialog(BuildContext context) {
           Text(
             "Une nouvelle version (${latestVersion.value}) de l'application est disponible.",
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 18,
               color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
           const SizedBox(height: 10),
           Text(
-            "Changements : ${releaseNode.value}.",
+            "Changements :\n${releaseNode.value}",
             style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey[600],
-              fontStyle: FontStyle.italic,
+              fontSize: 16,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ],
@@ -181,4 +185,19 @@ void downloadAndInstallUpdate() async {
     isInstalling.value = false;
     print('Error downloading or installing update: $e');
   }
+}
+
+bool isCurrentTheLatestVersion(String currentVersion, String latestVersion) {
+  List<String> current = currentVersion.split(".");
+  List<String> latest = latestVersion.split(".");
+  
+  for (int i = 0; i < max(current.length, latest.length); i++) {
+    if (int.parse(current[i]) > int.parse(latest[i])) {
+      return true;
+    } else if (int.parse(current[i]) < int.parse(latest[i])) {
+      return false;
+    }
+  }
+
+  return true;
 }

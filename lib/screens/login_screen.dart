@@ -62,7 +62,7 @@ class _LoginScreen extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    checkVersion(context);
+    checkVersion(context, false);
     checkSharedPrefs();
   }
 

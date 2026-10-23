@@ -1,6 +1,7 @@
 import 'package:ad_up/ade/ade_ical.dart';
 import 'package:ad_up/ade/ade_link.dart';
 import 'package:ad_up/components/button.dart';
+import 'package:ad_up/utils/app_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -37,7 +38,8 @@ class _OptionsScreen extends State<OptionsScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 10,
             children: [
-              getCupertinoButton(context, "Se déconnecter", Icons.logout_rounded, () => logout())
+              getCupertinoButton(context, "Se déconnecter", Icons.logout_rounded, () => logout()),
+              getCupertinoButton(context, "Vérifier les mises à jour", Icons.update_rounded, () => checkVersion(context, true))
             ],
           ),
         ),
