@@ -5,8 +5,8 @@ plugins {
 }
 
 android {
-    namespace = "com.example.ad_up"
-    compileSdk = flutter.compileSdkVersion
+    namespace = "fr.gab400.ad_up"
+    compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

@@ -10,10 +10,10 @@ class App extends StatefulWidget {
   const App({super.key});
 
   @override
-  State<StatefulWidget> createState() => _HomePageState();
+  State<StatefulWidget> createState() => _App();
 }
 
-class _HomePageState extends State<App> {
+class _App extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
