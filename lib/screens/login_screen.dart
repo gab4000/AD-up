@@ -7,6 +7,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../ade/ade_tree_ids.dart';
 import '../components/button.dart';
+import '../utils/app_controller.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -61,6 +62,7 @@ class _LoginScreen extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
+    checkVersion(context);
     checkSharedPrefs();
   }
 
