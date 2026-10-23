@@ -1,17 +1,11 @@
-<manifest xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"
-        tools:ignore="RequestInstallPackagesPolicy" />
     <application
-        android:label="AD-up"
+        android:label="ad_up"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
-        android:allowBackup="false">
+        android:icon="@mipmap/ic_launcher">
         <activity
-            android:name="fr.gab400.ad_up.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:taskAffinity=""
