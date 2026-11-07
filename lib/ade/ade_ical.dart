@@ -1,8 +1,5 @@
 import 'package:ad_up/ade/ade_types.dart';
-import 'package:ad_up/components/class.dart';
 import 'package:http/http.dart';
-
-Set<Class> classes = {};
 
 Future<String> getStrIcal(ADESessionParams params, String classID) async {
   final response = await get(Uri.parse("https://edt.grenoble-inp.fr/directCal/2026-2027/etudiant/prepaINPGrenoble?resources=$classID"),
