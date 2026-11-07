@@ -1,8 +1,8 @@
-import 'package:ad_up/ade/ade_ical.dart';
 import 'package:ad_up/components/break.dart';
 import 'package:ad_up/components/period.dart';
 import 'package:flutter/material.dart';
 
+import '../ade/ade_tree_ids.dart';
 import '../utils/time_utils.dart';
 import 'options_screen.dart';
 
@@ -14,22 +14,24 @@ class ScheduleScreen extends StatefulWidget {
 }
 
 class _ScheduleScreen extends State<ScheduleScreen> {
-  DateTime date = DateTime.now();
+  late DateTime date = DateTime.now();
   late List<Period> todayClasses = getTodayClasses();
 
-  Future<void> _selectDate() async {
-    final DateTime? pickedDate = await showDatePicker(
-      locale: Locale("fr", "FR"),
-      context: context,
-      initialDate: date,
-      firstDate: DateTime(2026, 09, 01),
-      lastDate: DateTime(2027, 06, 15),
-    );
-
-    setState(() {
+  Future<void> _selectDate([DateTime? givenDate]) async {
+    if (givenDate == null) {
+      final DateTime? pickedDate = await showDatePicker(
+        locale: Locale("fr", "FR"),
+        context: context,
+        initialDate: date,
+        firstDate: DateTime(2026, 09, 01),
+        lastDate: DateTime(2027, 06, 18),
+      );
       date = pickedDate ?? DateTime.now();
-      todayClasses = getTodayClasses();
-    });
+    } else {
+      date = givenDate;
+    }
+
+    todayClasses = getTodayClasses();
   }
 
   List<Period> getTodayClasses() {
@@ -41,12 +43,14 @@ class _ScheduleScreen extends State<ScheduleScreen> {
 
     todayClasses.sort((a, b) => a.start.compareTo(b.start));
     List<Period> breaksToAdd = <Period>[];
-    for (Period el in todayClasses) {
-      int index = todayClasses.indexOf(el);
+    for (Period cl in todayClasses) {
+      int index = todayClasses.indexOf(cl);
       if (index == todayClasses.length - 1) continue;
-      Period next = todayClasses.elementAt(index + 1);
-      if (el.start == next.start || el.end == next.end) continue;
-      if (el.end != next.start) breaksToAdd.add(Break(start: el.end, end: next.start));
+
+      Period nextCl = todayClasses.elementAt(index + 1);
+      if (cl.start == nextCl.start || cl.end == nextCl.end) continue;
+
+      if (cl.end != nextCl.start) breaksToAdd.add(Break(start: cl.end, end: nextCl.start));
     }
 
     todayClasses.addAll(breaksToAdd);

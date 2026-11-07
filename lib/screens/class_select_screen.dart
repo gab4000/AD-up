@@ -21,9 +21,10 @@ class _ClassSelectScreenState extends State<ClassSelectScreen> {
   void selectClass(BuildContext context, String classID) {
     setState(() => isLoading = true);
     FlutterSecureStorage().write(key: "class", value: classID);
-    load(context, widget.params, classID);
-    setState(() => isLoading = false);
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ScheduleScreen()));
+    load(context, widget.params, classID).whenComplete(() {
+      setState(() => isLoading = false);
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => ScheduleScreen()));
+    });
   }
 
   List<Widget> getClassBtns(BuildContext context) {

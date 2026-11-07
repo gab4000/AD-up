@@ -37,9 +37,10 @@ class _LoginScreen extends State<LoginScreen> {
     setState(() => isLoading = true);
     try {
       ADESessionParams params = await connect(username, password);
-      load(context, params, classID);
-      setState(() => isLoading = false);
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => ScheduleScreen()));
+      load(context, params, classID).whenComplete(() {
+        setState(() => isLoading = false);
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ScheduleScreen()));
+      });
     } catch (_) {
       setState(() => isLoading = false);
       showDialog(
