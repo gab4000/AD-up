@@ -31,7 +31,7 @@ class _ScheduleScreen extends State<ScheduleScreen> {
       date = givenDate;
     }
 
-    todayClasses = getTodayClasses();
+    setState(() => todayClasses = getTodayClasses());
   }
 
   List<Period> getTodayClasses() {
