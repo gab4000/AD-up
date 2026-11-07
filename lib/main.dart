@@ -7,6 +7,7 @@ import 'firebase_options.dart';
 
 void main() {
   Firebase.initializeApp(
+    name: "AD-up",
     options: DefaultFirebaseOptions.currentPlatform
   );
   runApp(const App());
@@ -27,6 +28,7 @@ class _App extends State<App> {
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       title: "AD-up",
       theme: ThemeData(
+        fontFamily: "Roboto",
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF47B9FF),
@@ -34,6 +36,7 @@ class _App extends State<App> {
         ),
       ),
       darkTheme: ThemeData(
+        fontFamily: "Roboto",
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF47B9FF),
