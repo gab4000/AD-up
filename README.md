@@ -5,6 +5,8 @@ Une application Android qui permet de visualiser efficacement et simplement les 
 - [ ] **BUG** : Affichage des noms non fonctionnel
 - [ ] **FEAT** : Pouvoir changer de jour en faisant glisser droite/gauche
 - [ ] **FEAT** : Pouvoir changer de classe sans se déconnecter
+- [ ] **CHANG** : Ajouter les autre EDT
+- [ ] **BUG** : Pb quelconques d'affichage (compoants non centrés, ...)
 
 ## Utilisation de l'IA
 L'IA a été utilisée uniquement pour générer des Regex en dart (flemme de comprendre ce langage du démon)
