@@ -10,7 +10,7 @@ Une application Android qui permet de visualiser efficacement et simplement les 
 - [ ] **FEAT** : Ajouter une icône d'application
 
 ## Utilisation de l'IA
-L'IA a été utilisée uniquement pour générer des Regex en dart (flemme de comprendre ce langage du démon)
+L'IA a été utilisée uniquement pour générer des Regex en dart
 
 ## Crédits tiers
 La partie du code qui gère la connexion au système ADE via les cookies s'inspire et reprend les concepts du repo [Fouinard/CPPocket](https://github.com/Fouinard/CPPocket)
