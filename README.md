@@ -7,6 +7,7 @@ Une application Android qui permet de visualiser efficacement et simplement les 
 - [ ] **FEAT** : Pouvoir changer de classe sans se déconnecter
 - [ ] **CHANG** : Ajouter les autre EDT
 - [ ] **BUG** : Pb quelconques d'affichage (compoants non centrés, ...)
+- [ ] **FEAT** : Ajouter une icône d'application
 
 ## Utilisation de l'IA
 L'IA a été utilisée uniquement pour générer des Regex en dart (flemme de comprendre ce langage du démon)
